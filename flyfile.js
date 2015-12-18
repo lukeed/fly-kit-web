@@ -24,18 +24,6 @@ const paths = {
 	}
 };
 
-const PREFIXER = [
-	'ie >= 10',
-	'ie_mob >= 10',
-	'ff >= 30',
-	'chrome >= 34',
-	'safari >= 7',
-	'opera >= 23',
-	'ios >= 7',
-	'android >= 4.4',
-	'bb >= 10'
-];
-
 let isProd = false;
 let isWatch = false;
 let isServer = false;
@@ -58,7 +46,7 @@ export default function* () {
  * Run a dev server & Recompile when files change
  */
 export function* watch() {
-	yield this.start(['_serve', 'default']);
+	yield this.start(['default', '_serve']);
 }
 
 /**
@@ -145,6 +133,9 @@ export function* styles() {
 	yield this
 		.source(paths.styles.src)
 		.sass({outputStyle: 'compressed'})
+		.autoprefixer({
+			browsers: ['Firefox <= 20']
+		})
 		.concat('main.min.css')
 		.target(paths.styles.dest);
 
