@@ -65,7 +65,7 @@ export function* watch() {
  * Build & Serve the production files
  */
 export function* serve() {
-	yield this.start(['build', '_serve'])
+	yield this.start(['build', '_serve']);
 }
 
 export function* build() {
@@ -126,8 +126,8 @@ export function* scripts() {
 	yield this
 		.source(paths.scripts.src)
 		.babel({
-      presets: ['es2015'],
-      sourceMaps: true
+			presets: ['es2015'],
+			sourceMaps: true
 		})
 		.concat('main.min.js')
 		.target(paths.scripts.dest);
