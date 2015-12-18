@@ -1,0 +1,44 @@
+{
+  "name": "fly-starter",
+  "version": "0.0.0",
+  "description": "Starter Kit for scaffolding a Web App with Fly",
+  "license": "MIT",
+  "repository": "lukeed/fly-starter",
+  "author": {
+    "name": "Luke Edwards",
+    "email": "luke.edwards05@gmail.com",
+    "url": "lukeed.com"
+  },
+  "engines": {
+    "iojs": ">= 1.0.0",
+    "node": ">= 0.11.0"
+  },
+  "scripts": {
+    "build": "fly build",
+    "fly": "fly",
+    "serve": "fly serve",
+    "watch": "fly watch",
+    "test": "xo && ava"
+  },
+  "files": [
+    "index.js"
+  ],
+  "keywords": [
+    "fly", "starter", "kit", "boilerplate"
+  ],
+  "dependencies": {},
+  "devDependencies": {
+    "ava": "^0.8.0",
+    "browser-sync": "^2.10.0",
+    "fly": "^0.8.4",
+    "fly-eslint": "^1.0.0",
+    "fly-sass": "^0.3.0",
+    "fly-uglify": "^1.0.0",
+    "fly-useref": "^0.1.0",
+    "fly-babel": "lukeed/fly-babel#79a70a37e6be1abbdd548bb1f0ec26d4ca54313e",
+    "xo": "^0.12.1"
+  },
+  "xo": {
+    "ignores": ["test.js"]
+  }
+}
