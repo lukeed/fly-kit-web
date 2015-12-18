@@ -20,9 +20,6 @@
     "watch": "fly watch",
     "test": "ava"
   },
-  "files": [
-    "index.js"
-  ],
   "keywords": [
     "boilerplate",
     "fly",
@@ -33,11 +30,15 @@
   "dependencies": {},
   "devDependencies": {
     "ava": "^0.8.0",
+    "babel-eslint": "^4.1.6",
     "browser-sync": "^2.10.0",
     "eslint-config-xo": "^0.9.0",
+    "eslint-plugin-babel": "^3.0.0",
     "fly": "^0.8.4",
-    "fly-babel": "lukeed/fly-babel#79a70a37e6be1abbdd548bb1f0ec26d4ca54313e",
+    "fly-autoprefixer": "^0.2.0",
+    "fly-babel": "lukeed/fly-babel#7794be6859620bf604ab62e9e7fc87d657237f22",
     "fly-eslint": "^1.0.0",
+    "fly-prefix": "0.0.0",
     "fly-sass": "^0.3.0",
     "fly-uglify": "^1.0.0",
     "fly-useref": "^0.1.0"
