@@ -1,5 +1,3 @@
+/* globals console */
 const name = 'Johnny boy';
-
-(() => {
-	alert(`Hello ${name}!!`);
-})
+console.log(`Hello ${name}!!`);
