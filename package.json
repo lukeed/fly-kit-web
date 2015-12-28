@@ -1,6 +1,6 @@
 {
   "name": "fly-starter",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Starter Kit for scaffolding a Web App with Fly",
   "license": "MIT",
   "repository": "lukeed/fly-starter",
@@ -36,9 +36,8 @@
     "eslint-plugin-babel": "^3.0.0",
     "fly": "^0.8.4",
     "fly-autoprefixer": "^0.2.0",
-    "fly-babel": "lukeed/fly-babel#7794be6859620bf604ab62e9e7fc87d657237f22",
+    "fly-babel": "bucaran/fly-babel#68cf7ec195ce148cb655f729b9f23a497bc85401",
     "fly-eslint": "^1.0.0",
-    "fly-prefix": "0.0.0",
     "fly-sass": "^0.3.0",
     "fly-uglify": "^1.0.0",
     "fly-useref": "^0.1.0"
