@@ -16,6 +16,33 @@ $ git init
 
 You now have a fresh copy of this repo.
 
+## Usage
+
+**Default** -- build development files & recompile on file changes
+```
+npm run fly
+```
+
+**Watch** -- build development files & start a server. Recompiles & refreshes server on file changes
+```
+npm run watch
+```
+
+**Build** -- build production-ready assets
+```
+npm run build
+```
+
+**Serve** -- build production-ready assets & start a server
+```
+npm run serve
+```
+
+**Test** -- Run tests using [Ava](https://github.com/sindresorhus/ava)
+```
+# todo
+```
+
 ## License
 
 MIT © [Luke Edwards](https://github.com/lukeed)
