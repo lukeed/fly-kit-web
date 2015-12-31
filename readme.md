@@ -10,8 +10,8 @@ Please see [this issue](https://github.com/bucaran/fly/issues/121) to stay updat
 ```
 $ git clone https://github.com/lukeed/fly-starter.git
 $ cd fly-starter
-$ rm -rf .git
-$ git init
+$ rm -rf .git && git init
+$ npm install
 ```
 
 You now have a fresh copy of this repo.
