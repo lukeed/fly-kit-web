@@ -31,7 +31,7 @@ let isServer = false;
 /**
  * Default Task
  */
-export default function* () {
+export default function * () {
 	isWatch = true;
 	isProd = false;
 	yield this.start('clean');
@@ -45,18 +45,18 @@ export default function* () {
 /**
  * Run a dev server & Recompile when files change
  */
-export function* watch() {
+export function * watch() {
 	yield this.start(['default', '_serve']);
 }
 
 /**
  * Build & Serve the production files
  */
-export function* serve() {
+export function * serve() {
 	yield this.start(['build', '_serve']);
 }
 
-export function* build() {
+export function * build() {
 	isProd = true; isWatch = false;
 	yield this.start('clean');
 	yield this.start(['eslint', 'images', 'fonts', 'scripts', 'styles', 'html'], {parallel: true});
@@ -67,17 +67,17 @@ export function* build() {
 // ###
 
 // Delete the output directories
-export function* clean() {
+export function * clean() {
 	yield this.clear('dist');
 }
 
 // Lint javascript
-export function* eslint() {
+export function * eslint() {
 	yield this.source(paths.scripts.src).eslint();
 }
 
 // Copy all images, compress them, then send to dest
-export function* images() {
+export function * images() {
   // yield this.clear(paths.scripts.dest);
 	yield this.source(paths.images.src).target(paths.images.dest);
 
@@ -87,7 +87,7 @@ export function* images() {
 }
 
 // Copy all fonts, then send to dest
-export function* fonts() {
+export function * fonts() {
   // yield this.clear(paths.fonts.dest);
 	yield this.source(paths.fonts.src).target(paths.fonts.dest);
 
@@ -97,7 +97,7 @@ export function* fonts() {
 }
 
 // Scan your HTML for assets & optimize them
-export function* html() {
+export function * html() {
   // yield this.clear(paths.html.dest);
 	yield this.source(paths.html.src).target(paths.html.dest);
 
@@ -109,7 +109,7 @@ export function* html() {
 }
 
 //
-export function* scripts() {
+export function * scripts() {
   // yield this.clear(paths.scripts.dest);
 	yield this
 		.source(paths.scripts.src)
@@ -128,7 +128,7 @@ export function* scripts() {
 }
 
 // Compile and automatically prefix stylesheets
-export function* styles() {
+export function * styles() {
   // yield this.clear(paths.styles.dest);
 	yield this
 		.source(paths.styles.src)
@@ -145,7 +145,7 @@ export function* styles() {
 }
 
 // Launch loacl serve at develop directory
-export function* _serve() {
+export function * _serve() {
 	isServer = true;
 
 	browserSync({
