@@ -116,7 +116,7 @@ export function * scripts() {
 		.source(paths.scripts.src)
 		.babel({
 			presets: ['es2015'],
-			sourceMaps: true
+			sourceMaps: !isProd
 		})
 		.concat('main.min.js')
 		.target(paths.scripts.dest);
