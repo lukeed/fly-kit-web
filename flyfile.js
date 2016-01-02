@@ -103,9 +103,10 @@ export function * html() {
 
 	if (isWatch && isServer) {
 		reload();
-	} else if (isProd) {
-		yield this.source(paths.html.dest).htmlmin();
 	}
+	// else if (isProd) {
+		// yield this.source(paths.html.dest).htmlmin();
+	// }
 }
 
 //
@@ -122,9 +123,10 @@ export function * scripts() {
 
 	if (isWatch && isServer) {
 		reload();
-	} else if (isProd) {
-		yield this.source(paths.scripts.dest).uglify();
 	}
+	// else if (isProd) {
+		// yield this.source(paths.scripts.dest).uglify();
+	// }
 }
 
 // Compile and automatically prefix stylesheets
