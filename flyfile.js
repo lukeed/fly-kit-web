@@ -60,6 +60,7 @@ export function * build() {
 	isProd = true; isWatch = false;
 	yield this.start('clean');
 	yield this.start(['eslint', 'images', 'fonts', 'scripts', 'styles', 'html'], {parallel: true});
+	yield this.start('rev');
 }
 
 // ###
@@ -144,6 +145,17 @@ export function * styles() {
 	if (isWatch && isServer) {
 		reload();
 	}
+}
+
+export function * rev() {
+	const src = ['scripts', 'styles', 'images'].map(type => {
+		return `${paths[type].dest}/**/*`;
+	});
+
+	return this.source(src).rev({
+		base: paths.html.dest,
+		replace: true
+	});
 }
 
 // Launch loacl serve at develop directory
