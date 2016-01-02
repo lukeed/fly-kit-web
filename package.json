@@ -41,8 +41,5 @@
     "fly-sass": "^0.3.0",
     "fly-uglify": "^1.0.0",
     "fly-useref": "^0.1.0"
-  },
-  "eslintConfig": {
-    "extends": "xo/esnext"
   }
 }
