@@ -1,6 +1,6 @@
 {
   "name": "fly-starter",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "description": "Starter Kit for scaffolding a Web App with Fly",
   "license": "MIT",
   "repository": "lukeed/fly-starter",
@@ -22,10 +22,10 @@
   },
   "keywords": [
     "boilerplate",
-    "fly",
-    "kit",
     "starter",
-    "webapp"
+    "webapp",
+    "kit",
+    "fly"
   ],
   "dependencies": {},
   "devDependencies": {
@@ -38,11 +38,8 @@
     "fly-autoprefixer": "^0.2.0",
     "fly-babel": "^0.7.0",
     "fly-eslint": "^1.0.0",
+    "fly-rev": "^0.8.0",
     "fly-sass": "^0.3.0",
-    "fly-uglify": "^1.0.0",
-    "fly-useref": "^0.1.0"
-  },
-  "eslintConfig": {
-    "extends": "xo/esnext"
+    "fly-uglify": "^1.0.0"
   }
 }

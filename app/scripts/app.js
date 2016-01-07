@@ -1,3 +1,3 @@
 /* globals console */
-const name = 'Johnny boy';
-console.log(`Hello ${name}!!`);
+const name = 'Johnny';
+console.log(`Heeeeere's ${name}!!`);

@@ -31,14 +31,14 @@ let isServer = false;
 /**
  * Default Task: watch
  */
-export default function* () {
+export default function * () {
 	yield this.start('watch');
 }
 
 /**
  * Run a dev server & Recompile when files change
  */
-export function* watch() {
+export function * watch() {
 	isWatch = true;
 	isProd = false;
 	yield this.start('clean');
@@ -53,11 +53,12 @@ export function* watch() {
 /**
  * Build the production files
  */
-export function* build() {
+export function * build() {
 	isProd = true;
 	isWatch = false;
 	yield this.start('clean');
 	yield this.start(['eslint', 'images', 'fonts', 'scripts', 'styles', 'html'], {parallel: true});
+	yield this.start('rev');
 }
 
 // ###
@@ -65,17 +66,17 @@ export function* build() {
 // ###
 
 // Delete the output directories
-export function* clean() {
+export function * clean() {
 	yield this.clear('dist');
 }
 
 // Lint javascript
-export function* eslint() {
+export function * eslint() {
 	yield this.source(paths.scripts.src).eslint();
 }
 
 // Copy all images, compress them, then send to dest
-export function* images() {
+export function * images() {
 	yield this.source(paths.images.src).target(paths.images.dest);
 
 	if (isWatch && isServer) {
@@ -84,7 +85,7 @@ export function* images() {
 }
 
 // Copy all fonts, then send to dest
-export function* fonts() {
+export function * fonts() {
 	yield this.source(paths.fonts.src).target(paths.fonts.dest);
 
 	if (isWatch && isServer) {
@@ -93,7 +94,7 @@ export function* fonts() {
 }
 
 // Scan your HTML for assets & optimize them
-export function* html() {
+export function * html() {
 	yield this.source(paths.html.src).target(paths.html.dest);
 
 	if (isWatch && isServer) {
@@ -103,13 +104,13 @@ export function* html() {
 	}
 }
 
-// compile scripts
-export function* scripts() {
+// Compile scripts
+export function * scripts() {
 	yield this
 		.source(paths.scripts.src)
 		.babel({
 			presets: ['es2015'],
-			sourceMaps: true
+			sourceMaps: !isProd
 		})
 		.concat('main.min.js')
 		.target(paths.scripts.dest);
@@ -121,12 +122,12 @@ export function* scripts() {
 	}
 }
 
-export function* uglify() {
+export function * uglify() {
 	yield this.source(paths.scripts.dest).uglify().target(paths.scripts.dest);
 }
 
 // Compile and automatically prefix stylesheets
-export function* styles() {
+export function * styles() {
 	yield this
 		.source(paths.styles.src)
 		.sass({outputStyle: 'compressed'})
@@ -139,6 +140,17 @@ export function* styles() {
 	if (isWatch && isServer) {
 		reload();
 	}
+}
+
+export function * rev() {
+	const src = ['scripts', 'styles', 'images'].map(type => {
+		return `${paths[type].dest}/**/*`;
+	});
+
+	return this.source(src).rev({
+		base: paths.html.dest,
+		replace: true
+	});
 }
 
 // Launch loacl serve at develop directory

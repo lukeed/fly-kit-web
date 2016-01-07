@@ -12,11 +12,38 @@ Please, [go get it](https://github.com/lukeed/generator-fly-starter).
 ```
 $ git clone https://github.com/lukeed/fly-starter.git
 $ cd fly-starter
-$ rm -rf .git
-$ git init
+$ rm -rf .git && git init
+$ npm install
 ```
 
 You now have a fresh copy of this repo.
+
+## Usage
+
+**Default** -- build development files & recompile on file changes
+```
+npm run fly
+```
+
+**Watch** -- build development files & start a server. Recompiles & refreshes server on file changes
+```
+npm run watch
+```
+
+**Build** -- build production-ready assets
+```
+npm run build
+```
+
+**Serve** -- build production-ready assets & start a server
+```
+npm run serve
+```
+
+**Test** -- Run tests using [Ava](https://github.com/sindresorhus/ava)
+```
+# todo
+```
 
 ## License
 
