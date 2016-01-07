@@ -29,9 +29,16 @@ let isWatch = false;
 let isServer = false;
 
 /**
- * Default Task
+ * Default Task: watch
  */
 export default function* () {
+	yield this.start('watch');
+}
+
+/**
+ * Run a dev server & Recompile when files change
+ */
+export function* watch() {
 	isWatch = true;
 	isProd = false;
 	yield this.start('clean');
@@ -40,24 +47,15 @@ export default function* () {
 	yield this.watch(paths.images.src, 'images');
 	yield this.watch(paths.fonts.src, 'fonts');
 	yield this.watch(paths.html.src, 'html');
+	yield this.start('serve');
 }
 
 /**
- * Run a dev server & Recompile when files change
+ * Build the production files
  */
-export function* watch() {
-	yield this.start(['default', '_serve']);
-}
-
-/**
- * Build & Serve the production files
- */
-export function* serve() {
-	yield this.start(['build', '_serve']);
-}
-
 export function* build() {
-	isProd = true; isWatch = false;
+	isProd = true;
+	isWatch = false;
 	yield this.start('clean');
 	yield this.start(['eslint', 'images', 'fonts', 'scripts', 'styles', 'html'], {parallel: true});
 }
@@ -104,11 +102,11 @@ export function* html() {
 	if (isWatch && isServer) {
 		reload();
 	} else if (isProd) {
-		yield this.source(paths.html.dest).htmlmin();
+		// yield this.source(paths.html.dest).htmlmin();
 	}
 }
 
-//
+// compile scripts
 export function* scripts() {
   // yield this.clear(paths.scripts.dest);
 	yield this
@@ -123,8 +121,12 @@ export function* scripts() {
 	if (isWatch && isServer) {
 		reload();
 	} else if (isProd) {
-		yield this.source(paths.scripts.dest).uglify();
+		return yield this.start('uglify');
 	}
+}
+
+export function* uglify() {
+	yield this.source(paths.scripts.dest).uglify().target(paths.scripts.dest);
 }
 
 // Compile and automatically prefix stylesheets
@@ -145,12 +147,12 @@ export function* styles() {
 }
 
 // Launch loacl serve at develop directory
-export function* _serve() {
+export function* serve() {
 	isServer = true;
 
 	browserSync({
 		notify: false,
-		logPrefix: ' ✈ ',
+		logPrefix: 'Fly',
 		server: {
 			baseDir: 'dist'
 		}
