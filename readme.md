@@ -10,7 +10,7 @@ Please, [go get it](https://github.com/lukeed/generator-fly-starter).
 
 ### Manually
 ```
-$ git clone https://github.com/lukeed/fly-starter.git
+$ git clone --depth=1 https://github.com/lukeed/fly-starter.git
 $ cd fly-starter
 $ rm -rf .git && git init
 $ npm install
