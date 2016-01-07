@@ -118,7 +118,7 @@ export function * scripts() {
 	if (isWatch && isServer) {
 		reload();
 	} else if (isProd) {
-		return yield this.start('uglify');
+		// return yield this.start('uglify');
 	}
 }
 
@@ -154,7 +154,7 @@ export function * rev() {
 }
 
 // Launch loacl serve at develop directory
-export function* serve() {
+export function * serve() {
 	isServer = true;
 
 	browserSync({
