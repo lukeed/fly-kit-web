@@ -76,7 +76,6 @@ export function* eslint() {
 
 // Copy all images, compress them, then send to dest
 export function* images() {
-  // yield this.clear(paths.scripts.dest);
 	yield this.source(paths.images.src).target(paths.images.dest);
 
 	if (isWatch && isServer) {
@@ -86,7 +85,6 @@ export function* images() {
 
 // Copy all fonts, then send to dest
 export function* fonts() {
-  // yield this.clear(paths.fonts.dest);
 	yield this.source(paths.fonts.src).target(paths.fonts.dest);
 
 	if (isWatch && isServer) {
@@ -96,7 +94,6 @@ export function* fonts() {
 
 // Scan your HTML for assets & optimize them
 export function* html() {
-  // yield this.clear(paths.html.dest);
 	yield this.source(paths.html.src).target(paths.html.dest);
 
 	if (isWatch && isServer) {
@@ -108,7 +105,6 @@ export function* html() {
 
 // compile scripts
 export function* scripts() {
-  // yield this.clear(paths.scripts.dest);
 	yield this
 		.source(paths.scripts.src)
 		.babel({
@@ -131,7 +127,6 @@ export function* uglify() {
 
 // Compile and automatically prefix stylesheets
 export function* styles() {
-  // yield this.clear(paths.styles.dest);
 	yield this
 		.source(paths.styles.src)
 		.sass({outputStyle: 'compressed'})
