@@ -3,10 +3,8 @@
 > Starter Kit for scaffolding a Web App with [Fly](https://git.io/fly) as the task runner.
 
 ## Install
-### via Yeoman
-If you are looking for speed, convenience, and automation, there is a [Yeoman](http://yeoman.io) generator to help you get started with Fly.
-
-Please, [go get it](https://github.com/lukeed/generator-fly-starter).
+### [Yeoman](http://yeoman.io)
+If you are looking for speed, convenience, and automation, there is a [Yeoman generator](https://github.com/lukeed/generator-fly-starter) generator to help you get started with Fly.
 
 ### Manually
 ```
