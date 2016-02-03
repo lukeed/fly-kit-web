@@ -38,10 +38,20 @@ npm run build
 npm run serve
 ```
 
-**Test** -- Run tests using [Ava](https://github.com/sindresorhus/ava)
+**Test** -- Run tests (todo)
 ```
 # todo
 ```
+
+## Features
+* Asset Versioning
+* BrowserSync
+* CSS Autoprefixer
+* ES5, ES6, and ES7 support via Babel
+* ESLint 
+* HTML Minification
+* SASS pre-processor
+* Uglify JS
 
 ## License
 
