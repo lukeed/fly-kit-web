@@ -7,18 +7,22 @@ const paths = {
 		dest: 'dist/js'
 	},
 	styles: {
-		src: ['app/styles/**/*.{sass,scss}'],
+		src: 'app/styles/**/*.{sass,scss}',
 		dest: 'dist/css'
 	},
 	images: {
-		src: ['app/images/**/*'],
+		src: 'app/images/**/*.{jpg,png}',
 		dest: 'dist/img'
 	},
 	fonts: {
-		src: ['app/fonts/**/*'],
+		src: 'app/fonts/**/*.*',
 		dest: 'dist/fonts'
 	},
 	html: {
+		src: 'app/*.html',
+		dest: 'dist'
+	},
+	extras: {
 		src: ['app/*.html'],
 		dest: 'dist'
 	}
@@ -77,7 +81,9 @@ export function * eslint() {
 
 // Copy all images, compress them, then send to dest
 export function * images() {
-	yield this.source(paths.images.src).target(paths.images.dest);
+	yield this
+		.source(paths.images.src)
+		.target(paths.images.dest, {depth: 1});
 
 	if (isWatch && isServer) {
 		reload();
