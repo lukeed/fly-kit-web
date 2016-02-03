@@ -107,8 +107,24 @@ export function * html() {
 	if (isWatch && isServer) {
 		reload();
 	} else if (isProd) {
-		// yield this.source(paths.html.dest).htmlmin();
+		yield this.start('htmlmin');
 	}
+}
+
+export function * htmlmin() {
+	yield this.source(`${paths.html.dest}/*.html`)
+		.htmlmin({
+      removeComments: true,
+      collapseWhitespace: true,
+      collapseBooleanAttributes: true,
+      removeAttributeQuotes: true,
+      removeRedundantAttributes: true,
+      removeEmptyAttributes: true,
+      removeScriptTypeAttributes: true,
+      removeStyleLinkTypeAttributes: true,
+      removeOptionalTags: true
+    })
+    .target(paths.html.dest);
 }
 
 // Copy other root-level files
