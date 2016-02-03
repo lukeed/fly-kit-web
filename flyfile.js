@@ -23,7 +23,7 @@ const paths = {
 		dest: 'dist'
 	},
 	extras: {
-		src: ['app/*.html'],
+		src: 'app/*.{txt,json,webapp,ico}',
 		dest: 'dist'
 	}
 };
@@ -51,6 +51,7 @@ export function * watch() {
 	yield this.watch(paths.images.src, 'images');
 	yield this.watch(paths.fonts.src, 'fonts');
 	yield this.watch(paths.html.src, 'html');
+	yield this.start('extras');
 	yield this.start('serve');
 }
 
@@ -61,7 +62,7 @@ export function * build() {
 	isProd = true;
 	isWatch = false;
 	yield this.start('clean');
-	yield this.start(['eslint', 'images', 'fonts', 'scripts', 'styles', 'html'], {parallel: true});
+	yield this.start(['eslint', 'images', 'fonts', 'scripts', 'styles', 'html', 'extras'], {parallel: true});
 	yield this.start('rev');
 }
 
@@ -108,6 +109,11 @@ export function * html() {
 	} else if (isProd) {
 		// yield this.source(paths.html.dest).htmlmin();
 	}
+}
+
+// Copy other root-level files
+export function * extras() {
+	yield this.source(paths.extras.src).target(paths.extras.dest);
 }
 
 // Compile scripts
