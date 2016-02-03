@@ -146,12 +146,23 @@ export function * scripts() {
 	if (isWatch && isServer) {
 		reload();
 	} else if (isProd) {
-		// return yield this.start('uglify');
+		return yield this.start('uglify');
 	}
 }
 
 export function * uglify() {
-	yield this.source(paths.scripts.dest).uglify().target(paths.scripts.dest);
+	yield this.source(`${paths.scripts.dest}/*.js`)
+		.uglify({
+			compress: {
+	      conditionals:  true,
+	      comparisons: true,
+	      booleans: true,
+	      loops: true,
+	      join_vars: true,
+	      drop_console: true
+	    }
+		})
+		.target(paths.scripts.dest);
 }
 
 // Compile and automatically prefix stylesheets
