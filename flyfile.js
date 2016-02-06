@@ -114,17 +114,17 @@ export function * html() {
 export function * htmlmin() {
 	yield this.source(`${paths.html.dest}/*.html`)
 		.htmlmin({
-      removeComments: true,
-      collapseWhitespace: true,
-      collapseBooleanAttributes: true,
-      removeAttributeQuotes: true,
-      removeRedundantAttributes: true,
-      removeEmptyAttributes: true,
-      removeScriptTypeAttributes: true,
-      removeStyleLinkTypeAttributes: true,
-      removeOptionalTags: true
-    })
-    .target(paths.html.dest);
+			removeComments: true,
+			collapseWhitespace: true,
+			collapseBooleanAttributes: true,
+			removeAttributeQuotes: true,
+			removeRedundantAttributes: true,
+			removeEmptyAttributes: true,
+			removeScriptTypeAttributes: true,
+			removeStyleLinkTypeAttributes: true,
+			removeOptionalTags: true
+		})
+		.target(paths.html.dest);
 }
 
 // Copy other root-level files
@@ -154,13 +154,13 @@ export function * uglify() {
 	yield this.source(`${paths.scripts.dest}/*.js`)
 		.uglify({
 			compress: {
-	      conditionals:  true,
-	      comparisons: true,
-	      booleans: true,
-	      loops: true,
-	      join_vars: true,
-	      drop_console: true
-	    }
+				conditionals: true,
+				comparisons: true,
+				booleans: true,
+				loops: true,
+				join_vars: true,
+				drop_console: true
+			}
 		})
 		.target(paths.scripts.dest);
 }
