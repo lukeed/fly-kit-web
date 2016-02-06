@@ -1,5 +1,6 @@
 sudo: false
 language: node_js
+depth: 1
 node_js:
   - '5'
   - '4'
