@@ -18,7 +18,7 @@
     "fly": "fly",
     "serve": "fly build && fly serve",
     "watch": "fly watch",
-    "test": "echo No tests specified, yet."
+    "test": "xo"
   },
   "keywords": [
     "boilerplate",
@@ -33,11 +33,10 @@
     "fly": "^0.8.5",
     "fly-autoprefixer": "^0.2.0",
     "fly-babel": "^0.7.0",
-    "fly-eslint": "^1.0.0",
-    "fly-eslint-xo": "^1.0.0",
     "fly-htmlmin": "^1.0.0",
     "fly-rev": "^0.8.0",
     "fly-sass": "^0.3.0",
-    "fly-uglify": "^1.0.0"
+    "fly-uglify": "^1.0.0",
+    "fly-xo": "^1.0.0"
   }
 }
