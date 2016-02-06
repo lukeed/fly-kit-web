@@ -46,7 +46,7 @@ export function * watch() {
 	isWatch = true;
 	isProd = false;
 	yield this.start('clean');
-	yield this.watch(paths.scripts.src, ['eslint', 'scripts']);
+	yield this.watch(paths.scripts.src, ['lint', 'scripts']);
 	yield this.watch(paths.styles.src, 'styles');
 	yield this.watch(paths.images.src, 'images');
 	yield this.watch(paths.fonts.src, 'fonts');
@@ -62,7 +62,7 @@ export function * build() {
 	isProd = true;
 	isWatch = false;
 	yield this.start('clean');
-	yield this.start(['eslint', 'images', 'fonts', 'scripts', 'styles', 'html', 'extras'], {parallel: true});
+	yield this.start(['lint', 'images', 'fonts', 'scripts', 'styles', 'html', 'extras'], {parallel: true});
 	yield this.start('rev');
 }
 
@@ -76,8 +76,8 @@ export function * clean() {
 }
 
 // Lint javascript
-export function * eslint() {
-	yield this.source(paths.scripts.src).eslint();
+export function * lint() {
+	yield this.source(paths.scripts.src).xo();
 }
 
 // Copy all images, compress them, then send to dest
