@@ -135,7 +135,7 @@ export function * extras() {
 // Compile scripts
 export function * scripts() {
 	yield this
-		.source(paths.scripts.src)
+		.source('app/scripts/app.js')
 		.browserify({
 			transform: require('babelify').configure({presets: 'es2015'})
 		})
