@@ -1,4 +1,4 @@
-# Fly Starter [![Build Status](https://travis-ci.org/lukeed/fly-starter.svg?branch=master)](https://travis-ci.org/lukeed/fly-starter)
+# Fly Web Starter Kit [![Build Status](https://travis-ci.org/lukeed/fly-kit-web.svg?branch=master)](https://travis-ci.org/lukeed/fly-kit-web)
 
 > Starter Kit for scaffolding a Web App with [Fly](https://git.io/fly) as the task runner.
 
@@ -8,8 +8,8 @@ If you are looking for speed, convenience, and automation, there is a [Yeoman ge
 
 ### Manually
 ```
-$ git clone --depth=1 https://github.com/lukeed/fly-starter.git
-$ cd fly-starter
+$ git clone --depth=1 https://github.com/lukeed/fly-kit-web.git
+$ cd fly-kit-web
 $ rm -rf .git && git init
 $ npm install
 ```
