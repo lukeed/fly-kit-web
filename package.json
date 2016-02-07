@@ -34,7 +34,7 @@
     "browser-sync": "^2.10.0",
     "fly": "^0.8.5",
     "fly-autoprefixer": "^0.2.0",
-    "fly-browserify": "^0.1.2",
+    "fly-browserify": "^1.0.0",
     "fly-htmlmin": "^1.0.0",
     "fly-rev": "^0.8.0",
     "fly-sass": "^0.3.0",
