@@ -46,10 +46,12 @@ npm run serve
 ## Features
 * Asset Versioning
 * BrowserSync
+* Browserify (Common JS)
 * CSS Autoprefixer
 * ES5, ES6, and ES7 support via Babel
 * ESLint 
 * HTML Minification
+* **Offline** Caching (Service Worker)
 * SASS pre-processor
 * Uglify JS
 
