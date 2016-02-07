@@ -64,6 +64,7 @@ export function * build() {
 	yield this.start('clean');
 	yield this.start(['lint', 'images', 'fonts', 'scripts', 'styles', 'html', 'extras'], {parallel: true});
 	yield this.start('rev');
+	yield this.start('cache');
 }
 
 // ###
@@ -199,6 +200,19 @@ export function * rev() {
 		base: paths.html.dest,
 		replace: true
 	});
+}
+
+// Cache assets so they are available offline!
+export function * cache() {
+	const dir = paths.html.dest;
+	const ext = '{js,html,css,png,jpg,gif}';
+
+	yield this
+		.source(`${dir}/**/*.${ext}`)
+		.precache({
+			root: dir,
+      cacheId: 'fly-starter-kit'
+    })
 }
 
 // Launch loacl serve at develop directory

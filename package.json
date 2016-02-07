@@ -36,6 +36,7 @@
     "fly-autoprefixer": "^0.2.0",
     "fly-browserify": "^1.0.0",
     "fly-htmlmin": "^1.0.0",
+    "fly-precache": "^1.0.0",
     "fly-rev": "^0.8.0",
     "fly-sass": "^0.3.0",
     "fly-uglify": "^1.0.0",
