@@ -78,7 +78,9 @@ export function * clean() {
 
 // Lint javascript
 export function * lint() {
-	yield this.source(paths.scripts.src).xo();
+	yield this.source(paths.scripts.src).xo({
+		globals: ['navigator', 'window']
+	});
 }
 
 // Copy all images, compress them, then send to dest
