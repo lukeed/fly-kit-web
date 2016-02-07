@@ -5,3 +5,9 @@ node_js:
   - '5'
   - '4'
   - '0.12'
+
+install:
+  - npm install xo
+
+script:
+  - echo No build task needed.
