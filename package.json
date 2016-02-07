@@ -1,9 +1,9 @@
 {
-  "name": "fly-starter",
+  "name": "fly-kit-web",
   "version": "1.0.3",
   "description": "Starter Kit for scaffolding a Web App with Fly",
   "license": "MIT",
-  "repository": "lukeed/fly-starter",
+  "repository": "lukeed/fly-kit-web",
   "author": {
     "name": "Luke Edwards",
     "email": "luke.edwards05@gmail.com",
