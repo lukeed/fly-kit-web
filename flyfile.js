@@ -136,9 +136,8 @@ export function * extras() {
 export function * scripts() {
 	yield this
 		.source(paths.scripts.src)
-		.babel({
-			presets: ['es2015'],
-			sourceMaps: !isProd
+		.browserify({
+			transform: require('babelify').configure({presets: 'es2015'})
 		})
 		.concat('main.min.js')
 		.target(paths.scripts.dest);
