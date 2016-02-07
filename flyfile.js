@@ -62,8 +62,8 @@ export function * build() {
 	isProd = true;
 	isWatch = false;
 	yield this.start('clean');
-	yield this.start(['lint', 'images', 'fonts', 'scripts', 'styles', 'html', 'extras'], {parallel: true});
-	yield this.start('rev');
+	yield this.start(['lint', 'images', 'fonts', 'styles', 'html', 'extras'], {parallel: true});
+	yield this.start('scripts', 'rev');
 	yield this.start('cache');
 }
 
@@ -191,6 +191,7 @@ export function * styles() {
 	}
 }
 
+// Version these assets (Cache-busting)
 export function * rev() {
 	const src = ['scripts', 'styles', 'images'].map(type => {
 		return `${paths[type].dest}/**/*`;
