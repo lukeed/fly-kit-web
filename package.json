@@ -1,6 +1,6 @@
 {
   "name": "fly-starter",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Starter Kit for scaffolding a Web App with Fly",
   "license": "MIT",
   "repository": "lukeed/fly-starter",
@@ -66,7 +66,8 @@
       "flyfile.js"
     ],
     "globals": [
-      "window", "navigator"
+      "window",
+      "navigator"
     ]
   }
 }
