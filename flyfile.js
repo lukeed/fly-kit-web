@@ -214,8 +214,9 @@ export function * cache() {
 		.source(`${dir}/**/*.${ext}`)
 		.precache({
 			root: dir,
-      cacheId: 'fly-starter-kit'
-    })
+			cacheId: 'fly-starter-kit',
+			stripPrefix: dir
+		})
 }
 
 // Launch loacl serve at develop directory
