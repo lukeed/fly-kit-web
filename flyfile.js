@@ -1,7 +1,11 @@
-import browserSync from 'browser-sync';
-const reload = browserSync.reload;
+var x = module.exports;
+var browserSync = require('browser-sync');
 
-const paths = {
+var isProd = false;
+var isWatch = false;
+var isServer = false;
+
+var paths = {
 	scripts: {
 		src: ['app/scripts/**/*.js'],
 		dest: 'dist/js'
@@ -28,21 +32,17 @@ const paths = {
 	}
 };
 
-let isProd = false;
-let isWatch = false;
-let isServer = false;
-
 /**
  * Default Task: watch
  */
-export default function * () {
+x.default = function * () {
 	yield this.start('watch');
-}
+};
 
 /**
  * Run a dev server & Recompile when files change
  */
-export function * watch() {
+x.watch = function * () {
 	isWatch = true;
 	isProd = false;
 	yield this.start('clean');
@@ -58,7 +58,7 @@ export function * watch() {
 /**
  * Build the production files
  */
-export function * build() {
+x.build = function * () {
 	isProd = true;
 	isWatch = false;
 	yield this.start('clean');
@@ -72,49 +72,39 @@ export function * build() {
 // ###
 
 // Delete the output directories
-export function * clean() {
+x.clean = function * () {
 	yield this.clear('dist');
 }
 
 // Lint javascript
-export function * lint() {
+x.lint = function * () {
 	yield this.source(paths.scripts.src).xo({
 		globals: ['navigator', 'window']
 	});
 }
 
 // Copy all images, compress them, then send to dest
-export function * images() {
+x.images = function * () {
 	yield this
 		.source(paths.images.src)
 		.target(paths.images.dest, {depth: 1});
 
-	if (isWatch && isServer) {
-		reload();
-	}
+	reload();
 }
 
 // Copy all fonts, then send to dest
-export function * fonts() {
+x.fonts = function * () {
 	yield this.source(paths.fonts.src).target(paths.fonts.dest);
-
-	if (isWatch && isServer) {
-		reload();
-	}
+	reload();
 }
 
 // Scan your HTML for assets & optimize them
-export function * html() {
+x.html = function * () {
 	yield this.source(paths.html.src).target(paths.html.dest);
-
-	if (isWatch && isServer) {
-		reload();
-	} else if (isProd) {
-		yield this.start('htmlmin');
-	}
+	isProd ? yield this.start('htmlmin') : reload();
 }
 
-export function * htmlmin() {
+x.htmlmin = function * () {
 	yield this.source(`${paths.html.dest}/*.html`)
 		.htmlmin({
 			removeComments: true,
@@ -131,12 +121,12 @@ export function * htmlmin() {
 }
 
 // Copy other root-level files
-export function * extras() {
+x.extras = function * () {
 	yield this.source(paths.extras.src).target(paths.extras.dest);
 }
 
 // Compile scripts
-export function * scripts() {
+x.scripts = function * () {
 	yield this
 		.source('app/scripts/app.js')
 		.browserify({
@@ -145,14 +135,10 @@ export function * scripts() {
 		.concat('main.min.js')
 		.target(paths.scripts.dest);
 
-	if (isWatch && isServer) {
-		reload();
-	} else if (isProd) {
-		return yield this.start('uglify');
-	}
+	isProd ? yield this.start('uglify') : reload();
 }
 
-export function * uglify() {
+x.uglify = function * () {
 	yield this.source(`${paths.scripts.dest}/*.js`)
 		.uglify({
 			compress: {
@@ -168,7 +154,7 @@ export function * uglify() {
 }
 
 // Compile and automatically prefix stylesheets
-export function * styles() {
+x.styles = function * () {
 	yield this
 		.source(paths.styles.src)
 		.sass({outputStyle: 'compressed'})
@@ -188,13 +174,11 @@ export function * styles() {
 		.concat('main.min.css')
 		.target(paths.styles.dest);
 
-	if (isWatch && isServer) {
-		reload();
-	}
+	reload();
 }
 
 // Version these assets (Cache-busting)
-export function * rev() {
+x.rev = function * () {
 	const src = ['scripts', 'styles', 'images'].map(type => {
 		return `${paths[type].dest}/**/*`;
 	});
@@ -206,7 +190,7 @@ export function * rev() {
 }
 
 // Cache assets so they are available offline!
-export function * cache() {
+x.cache = function * () {
 	const dir = paths.html.dest;
 	const ext = '{js,html,css,png,jpg,gif}';
 
@@ -220,7 +204,7 @@ export function * cache() {
 }
 
 // Launch loacl serve at develop directory
-export function * serve() {
+x.serve = function * () {
 	isServer = true;
 
 	browserSync({
@@ -230,4 +214,11 @@ export function * serve() {
 			baseDir: 'dist'
 		}
 	});
+}
+
+// helper, reload browsersync
+function reload() {
+	if (isWatch && isServer) {
+		browserSync.reload();
+	}
 }
