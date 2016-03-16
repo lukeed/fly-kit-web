@@ -61,9 +61,11 @@ x.watch = function * () {
 x.build = function * () {
 	isProd = true;
 	isWatch = false;
+
 	yield this.start('clean');
-	yield this.start(['lint', 'images', 'fonts', 'styles', 'html', 'extras'], {parallel: true});
-	yield this.start('scripts', 'rev');
+	yield this.start(['lint', 'fonts', 'html', 'extras']);
+	yield this.start(['images', 'styles', 'scripts']);
+	yield this.start('rev');
 	yield this.start('cache');
 };
 
