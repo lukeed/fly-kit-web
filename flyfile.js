@@ -178,7 +178,7 @@ x.styles = function * () {
 };
 
 x.rev = function * () {
-	/** @desc Cache assets so they are available offline! */
+	/** @desc Version/Hashify production assets. (Cache-Busting) */
 	var src = ['scripts', 'styles'].map(type => {
 		return paths[type].dest + '/**/*.*';
 	});
