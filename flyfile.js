@@ -192,7 +192,6 @@ x.rev = function * () {
 // Cache assets so they are available offline!
 x.cache = function * () {
 	var dir = paths.html.dest;
-	var ext = '{js,html,css,png,jpg,gif}';
 
 	yield this
 		.source(dir + '/**/*.{js,html,css,png,jpg,gif}')
