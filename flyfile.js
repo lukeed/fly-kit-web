@@ -53,7 +53,7 @@ x.watch = function * () {
 	yield this.watch(paths.html.src, 'html');
 	yield this.start('extras');
 	yield this.start('serve');
-}
+};
 
 /**
  * Build the production files
@@ -65,7 +65,7 @@ x.build = function * () {
 	yield this.start(['lint', 'images', 'fonts', 'styles', 'html', 'extras'], {parallel: true});
 	yield this.start('scripts', 'rev');
 	yield this.start('cache');
-}
+};
 
 // ###
 // # Tasks
@@ -74,14 +74,14 @@ x.build = function * () {
 // Delete the output directories
 x.clean = function * () {
 	yield this.clear('dist');
-}
+};
 
 // Lint javascript
 x.lint = function * () {
 	yield this.source(paths.scripts.src).xo({
 		globals: ['navigator', 'window']
 	});
-}
+};
 
 // Copy all images, compress them, then send to dest
 x.images = function * () {
@@ -90,19 +90,19 @@ x.images = function * () {
 		.target(paths.images.dest, {depth: 1});
 
 	reload();
-}
+};
 
 // Copy all fonts, then send to dest
 x.fonts = function * () {
 	yield this.source(paths.fonts.src).target(paths.fonts.dest);
 	reload();
-}
+};
 
 // Scan your HTML for assets & optimize them
 x.html = function * () {
 	yield this.source(paths.html.src).target(paths.html.dest);
 	isProd ? yield this.start('htmlmin') : reload();
-}
+};
 
 x.htmlmin = function * () {
 	yield this.source(`${paths.html.dest}/*.html`)
@@ -118,12 +118,12 @@ x.htmlmin = function * () {
 			removeOptionalTags: true
 		})
 		.target(paths.html.dest);
-}
+};
 
 // Copy other root-level files
 x.extras = function * () {
 	yield this.source(paths.extras.src).target(paths.extras.dest);
-}
+};
 
 // Compile scripts
 x.scripts = function * () {
@@ -136,7 +136,7 @@ x.scripts = function * () {
 		.target(paths.scripts.dest);
 
 	isProd ? yield this.start('uglify') : reload();
-}
+};
 
 x.uglify = function * () {
 	yield this.source(`${paths.scripts.dest}/*.js`)
@@ -151,7 +151,7 @@ x.uglify = function * () {
 			}
 		})
 		.target(paths.scripts.dest);
-}
+};
 
 // Compile and automatically prefix stylesheets
 x.styles = function * () {
@@ -175,7 +175,7 @@ x.styles = function * () {
 		.target(paths.styles.dest);
 
 	reload();
-}
+};
 
 // Version these assets (Cache-busting)
 x.rev = function * () {
@@ -187,7 +187,7 @@ x.rev = function * () {
 		base: paths.html.dest,
 		replace: true
 	});
-}
+};
 
 // Cache assets so they are available offline!
 x.cache = function * () {
@@ -200,8 +200,8 @@ x.cache = function * () {
 			root: dir,
 			cacheId: 'fly-starter-kit',
 			stripPrefix: dir
-		})
-}
+		});
+};
 
 // Launch loacl serve at develop directory
 x.serve = function * () {
@@ -214,7 +214,7 @@ x.serve = function * () {
 			baseDir: 'dist'
 		}
 	});
-}
+};
 
 // helper, reload browsersync
 function reload() {
