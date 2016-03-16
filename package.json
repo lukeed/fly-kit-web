@@ -62,9 +62,6 @@
     "xo": "*"
   },
   "xo": {
-    "ignore": [
-      "flyfile.js"
-    ],
     "globals": [
       "window",
       "navigator"

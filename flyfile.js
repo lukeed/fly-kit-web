@@ -145,6 +145,7 @@ x.uglify = function * () {
 				comparisons: true,
 				booleans: true,
 				loops: true,
+				/* eslint camelcase: 0 */
 				join_vars: true,
 				drop_console: true
 			}
