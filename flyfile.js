@@ -179,8 +179,8 @@ x.styles = function * () {
 
 // Version these assets (Cache-busting)
 x.rev = function * () {
-	const src = ['scripts', 'styles', 'images'].map(type => {
-		return `${paths[type].dest}/**/*`;
+	var src = ['scripts', 'styles'].map(type => {
+		return paths[type].dest + '/**/*.*';
 	});
 
 	return this.source(src).rev({
