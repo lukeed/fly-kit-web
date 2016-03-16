@@ -32,19 +32,16 @@ var paths = {
 	}
 };
 
-/**
- * Default Task: watch
- */
 x.default = function * () {
+	/** @desc Default Task: `watch` */
 	yield this.start('watch');
 };
 
-/**
- * Run a dev server & Recompile when files change
- */
 x.watch = function * () {
+	/** @desc Main Task: Starts a server & Recompiles files on change */
 	isWatch = true;
 	isProd = false;
+
 	yield this.start('clean');
 	yield this.watch(paths.scripts.src, ['lint', 'scripts']);
 	yield this.watch(paths.styles.src, 'styles');
@@ -55,10 +52,8 @@ x.watch = function * () {
 	yield this.start('serve');
 };
 
-/**
- * Build the production files
- */
 x.build = function * () {
+	/** @desc Main Task: Build the production files */
 	isProd = true;
 	isWatch = false;
 
@@ -73,20 +68,20 @@ x.build = function * () {
 // # Tasks
 // ###
 
-// Delete the output directories
 x.clean = function * () {
+	/** @desc Delete all files in the `dist` directory */
 	yield this.clear('dist');
 };
 
-// Lint javascript
 x.lint = function * () {
+	/** @desc Lint javascript files */
 	yield this.source(paths.scripts.src).xo({
 		globals: ['navigator', 'window']
 	});
 };
 
-// Copy all images, compress them, then send to dest
 x.images = function * () {
+	/** @desc Compress and copy all images to `dist` */
 	yield this
 		.source(paths.images.src)
 		.target(paths.images.dest, {depth: 1});
@@ -94,19 +89,20 @@ x.images = function * () {
 	reload();
 };
 
-// Copy all fonts, then send to dest
 x.fonts = function * () {
+	/** @desc Copy all fonts to `dist` */
 	yield this.source(paths.fonts.src).target(paths.fonts.dest);
 	reload();
 };
 
-// Scan your HTML for assets & optimize them
 x.html = function * () {
+	/** @desc Copy all HTML files to `dist`. Will run `htmlmin` during `build` task. */
 	yield this.source(paths.html.src).target(paths.html.dest);
 	return isProd ? yield this.start('htmlmin') : reload();
 };
 
 x.htmlmin = function * () {
+	/** @desc Minify all HTML files already within `dist`. Production only */
 	yield this.source(paths.html.dest + '/*.html')
 		.htmlmin({
 			removeComments: true,
@@ -122,13 +118,13 @@ x.htmlmin = function * () {
 		.target(paths.html.dest);
 };
 
-// Copy other root-level files
 x.extras = function * () {
+	/** @desc Copy other root-level files to `dist` */
 	yield this.source(paths.extras.src).target(paths.extras.dest);
 };
 
-// Compile scripts
 x.scripts = function * () {
+	/** @desc Compile javascript files with Browserify. Will run `uglify` during `build` task.  */
 	yield this
 		.source('app/scripts/app.js')
 		.browserify({
@@ -141,6 +137,7 @@ x.scripts = function * () {
 };
 
 x.uglify = function * () {
+	/** @desc Minify all javascript files already within `dist` */
 	yield this.source(paths.scripts.dest + '/*.js')
 		.uglify({
 			compress: {
@@ -155,8 +152,8 @@ x.uglify = function * () {
 		.target(paths.scripts.dest);
 };
 
-// Compile and automatically prefix stylesheets
 x.styles = function * () {
+	/** @desc Compile and prefix stylesheets with vendor properties */
 	yield this
 		.source(paths.styles.src)
 		.sass({outputStyle: 'compressed'})
@@ -179,8 +176,8 @@ x.styles = function * () {
 	reload();
 };
 
-// Version these assets (Cache-busting)
 x.rev = function * () {
+	/** @desc Cache assets so they are available offline! */
 	var src = ['scripts', 'styles'].map(type => {
 		return paths[type].dest + '/**/*.*';
 	});
@@ -191,8 +188,8 @@ x.rev = function * () {
 	});
 };
 
-// Cache assets so they are available offline!
 x.cache = function * () {
+	/** @desc Cache assets so they are available offline! */
 	var dir = paths.html.dest;
 
 	yield this
@@ -204,8 +201,8 @@ x.cache = function * () {
 		});
 };
 
-// Launch loacl serve at develop directory
 x.serve = function * () {
+	/** @desc Launch a local server from the `dist` directory. */
 	isServer = true;
 
 	browserSync({
