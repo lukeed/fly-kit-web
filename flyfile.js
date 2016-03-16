@@ -101,11 +101,11 @@ x.fonts = function * () {
 // Scan your HTML for assets & optimize them
 x.html = function * () {
 	yield this.source(paths.html.src).target(paths.html.dest);
-	isProd ? yield this.start('htmlmin') : reload();
+	return isProd ? yield this.start('htmlmin') : reload();
 };
 
 x.htmlmin = function * () {
-	yield this.source(`${paths.html.dest}/*.html`)
+	yield this.source(paths.html.dest + '/*.html')
 		.htmlmin({
 			removeComments: true,
 			collapseWhitespace: true,
@@ -135,11 +135,11 @@ x.scripts = function * () {
 		.concat('main.min.js')
 		.target(paths.scripts.dest);
 
-	isProd ? yield this.start('uglify') : reload();
+	return isProd ? yield this.start('uglify') : reload();
 };
 
 x.uglify = function * () {
-	yield this.source(`${paths.scripts.dest}/*.js`)
+	yield this.source(paths.scripts.dest + '/*.js')
 		.uglify({
 			compress: {
 				conditionals: true,
@@ -191,11 +191,11 @@ x.rev = function * () {
 
 // Cache assets so they are available offline!
 x.cache = function * () {
-	const dir = paths.html.dest;
-	const ext = '{js,html,css,png,jpg,gif}';
+	var dir = paths.html.dest;
+	var ext = '{js,html,css,png,jpg,gif}';
 
 	yield this
-		.source(`${dir}/**/*.${ext}`)
+		.source(dir + '/**/*.{js,html,css,png,jpg,gif}')
 		.precache({
 			root: dir,
 			cacheId: 'fly-starter-kit',
