@@ -53,6 +53,7 @@
     "fly": "^1.0.0",
     "fly-autoprefixer": "^0.2.0",
     "fly-browserify": "^1.0.0",
+    "fly-esnext": "^1.0.0",
     "fly-htmlmin": "^1.0.0",
     "fly-precache": "^1.0.0",
     "fly-rev": "^0.9.0",
