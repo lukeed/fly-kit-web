@@ -1,5 +1,5 @@
 import test from './test';
-import test2 from './test2';
+import test2 from './test-2';
 import {isOk, onSuccess, onError} from './sw';
 
 // Run the service worker if we determine it's safe to
