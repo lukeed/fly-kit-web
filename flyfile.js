@@ -1,4 +1,3 @@
-var x = module.exports;
 var browserSync = require('browser-sync');
 
 var isProd = false;
@@ -32,12 +31,12 @@ var paths = {
 	}
 };
 
-x.default = function * () {
+exports.default = function * () {
 	/** @desc Default Task: `watch` */
 	yield this.start('watch');
 };
 
-x.watch = function * () {
+exports.watch = function * () {
 	/** @desc Main Task: Starts a server & Recompiles files on change */
 	isWatch = true;
 	isProd = false;
@@ -52,15 +51,14 @@ x.watch = function * () {
 	yield this.start('serve');
 };
 
-x.build = function * () {
+exports.build = function * () {
 	/** @desc Main Task: Build the production files */
 	isProd = true;
 	isWatch = false;
 
 	yield this.start('clean');
 	yield this.start(['lint', 'fonts', 'html', 'extras']);
-	yield this.start(['images', 'styles', 'scripts']);
-	yield this.start('rev');
+	yield this.start(['images', 'styles', 'scripts', 'rev'], {parallel: false});
 	yield this.start('cache');
 };
 
@@ -68,19 +66,19 @@ x.build = function * () {
 // # Tasks
 // ###
 
-x.clean = function * () {
+exports.clean = function * () {
 	/** @desc Delete all files in the `dist` directory */
 	yield this.clear('dist');
 };
 
-x.lint = function * () {
+exports.lint = function * () {
 	/** @desc Lint javascript files */
 	yield this.source(paths.scripts.src).xo({
 		globals: ['navigator', 'window']
 	});
 };
 
-x.images = function * () {
+exports.images = function * () {
 	/** @desc Compress and copy all images to `dist` */
 	yield this
 		.source(paths.images.src)
@@ -89,19 +87,19 @@ x.images = function * () {
 	reload();
 };
 
-x.fonts = function * () {
+exports.fonts = function * () {
 	/** @desc Copy all fonts to `dist` */
 	yield this.source(paths.fonts.src).target(paths.fonts.dest);
 	reload();
 };
 
-x.html = function * () {
+exports.html = function * () {
 	/** @desc Copy all HTML files to `dist`. Will run `htmlmin` during `build` task. */
 	yield this.source(paths.html.src).target(paths.html.dest);
 	return isProd ? yield this.start('htmlmin') : reload();
 };
 
-x.htmlmin = function * () {
+exports.htmlmin = function * () {
 	/** @desc Minify all HTML files already within `dist`. Production only */
 	yield this.source(paths.html.dest + '/*.html')
 		.htmlmin({
@@ -118,12 +116,12 @@ x.htmlmin = function * () {
 		.target(paths.html.dest);
 };
 
-x.extras = function * () {
+exports.extras = function * () {
 	/** @desc Copy other root-level files to `dist` */
 	yield this.source(paths.extras.src).target(paths.extras.dest);
 };
 
-x.scripts = function * () {
+exports.scripts = function * () {
 	/** @desc Compile javascript files with Browserify. Will run `uglify` during `build` task.  */
 	yield this
 		.source('app/scripts/app.js')
@@ -136,7 +134,7 @@ x.scripts = function * () {
 	return isProd ? yield this.start('uglify') : reload();
 };
 
-x.uglify = function * () {
+exports.uglify = function * () {
 	/** @desc Minify all javascript files already within `dist` */
 	yield this.source(paths.scripts.dest + '/*.js')
 		.uglify({
@@ -153,7 +151,7 @@ x.uglify = function * () {
 		.target(paths.scripts.dest);
 };
 
-x.styles = function * () {
+exports.styles = function * () {
 	/** @desc Compile and prefix stylesheets with vendor properties */
 	yield this
 		.source(paths.styles.src)
@@ -177,19 +175,19 @@ x.styles = function * () {
 	reload();
 };
 
-x.rev = function * () {
-	/** @desc Version/Hashify production assets. (Cache-Busting) */
-	var src = ['scripts', 'styles'].map(type => {
-		return paths[type].dest + '/**/*.*';
-	});
-
-	return this.source(src).rev({
-		base: paths.html.dest,
-		replace: true
-	});
+exports.rev = function * () {
+	/** @desc Version production assets. (Cache-Busting) */
+	yield this.source('dist/{js,css}/**/*')
+		.rev({
+			strip: 'dist',
+			replace: true
+		})
+		.revManifest({dirname: 'dist'})
+    .revReplace({dirname: 'dist'})
+    .target('dist');
 };
 
-x.cache = function * () {
+exports.cache = function * () {
 	/** @desc Cache assets so they are available offline! */
 	var dir = paths.html.dest;
 
@@ -202,7 +200,7 @@ x.cache = function * () {
 		});
 };
 
-x.serve = function * () {
+exports.serve = function * () {
 	/** @desc Launch a local server from the `dist` directory. */
 	isServer = true;
 
@@ -213,6 +211,8 @@ x.serve = function * () {
 			baseDir: 'dist'
 		}
 	});
+
+	yield []; // must yield something
 };
 
 // helper, reload browsersync
