@@ -1,60 +1,65 @@
-# Fly Web Starter Kit [![Build Status](https://travis-ci.org/lukeed/fly-kit-web.svg?branch=master)](https://travis-ci.org/lukeed/fly-kit-web)
+# fly-kit-web
 
-> Starter Kit for scaffolding a Web App with [Fly](https://git.io/fly) as the task runner.
+> A lean Web App starter kit with [Fly](https://github.com/flyjs/fly)
+
+---
+<p align="center">Boilerplate & commands will evolve as my own development process does.</p>
+---
 
 ## Install
-### [Yeoman](http://yeoman.io)
-If you are looking for speed, convenience, and automation, there is a [Yeoman generator](https://github.com/lukeed/generator-fly-starter) generator to help you get started with Fly.
 
-### Manually
 ```
-$ git clone --depth=1 https://github.com/lukeed/fly-kit-web.git
-$ cd fly-kit-web
-$ rm -rf .git && git init
-$ npm install
+git clone https://github.com/lukeed/fly-kit-web
+npm install
+npm start
 ```
 
-You now have a fresh copy of this repo.
+> **Pro Tip:** Use [Yarn](https://yarnpkg.com/) to install NPM dependencies 3x faster than NPM!
 
-## Usage
 
-**Default** -- build development files & recompile on file changes
-```
-npm run fly
-```
+## Commands
 
-**Watch** -- build development files & start a server. Recompiles & refreshes server on file changes
+#### build
+
 ```
-npm run watch
+$ npm run build
 ```
 
-**Build** -- build production-ready assets
+Compiles all files. Output is sent to the `dist` directory.
+
+#### release
+
 ```
-npm run build
+$ npm run release
 ```
 
-**Serve** -- build production-ready assets & start a server
+Builds the app for production, includes [cache-busting](http://webassets.readthedocs.io/en/latest/expiring.html) asset names. Output is sent to the `release` directory.
+
+#### start
+
 ```
-npm run serve
+$ npm start
 ```
 
-**Test** -- Run tests (todo)
+Executes [`build`](#build) and runs your application (from the `dist` directory) in the browser.
+
+#### test
+
 ```
-# todo
+$ npm run test
 ```
 
-## Features
-* Asset Versioning
-* BrowserSync
-* Browserify (Common JS)
-* CSS Autoprefixer
-* ES5, ES6, and ES7 support via Babel
-* ESLint 
-* HTML Minification
-* **Offline** Caching (Service Worker)
-* SASS pre-processor
-* Uglify JS
+Lints all JavaScript files.
+
+#### watch
+
+```
+$ npm run watch
+```
+
+Like [`start`](#start), but will auto-compile & auto-reload the server after any file changes within the `src` directory.
+
 
 ## License
 
-MIT © [Luke Edwards](https://github.com/lukeed)
+MIT © [Luke Edwards](https://lukeed.com)
