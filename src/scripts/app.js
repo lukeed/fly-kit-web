@@ -1,17 +1,11 @@
-import test from './test';
-import test2 from './test-2';
-import {isOk, onSuccess, onError} from './sw';
+'use strict';
 
-// Run the service worker if we determine it's safe to
-// Note: this will Error during development because
-// 'service-worker.js' only exists after production builds.
-if (isOk) {
-	navigator.serviceWorker.register('service-worker.js').then(onSuccess).catch(onError);
+var $ = require('./demo');
+
+var obj = $.generate();
+
+var str;
+for (var k in obj) {
+	str = [k, obj[k]].map($.capitalize).join(' ');
+	console.log(str);
 }
-
-// Custom JS goes here!
-const name = 'Johnny';
-console.log(`Heeeeere's ${name}!!`);
-
-console.log(test);
-console.log(test2);
