@@ -24,64 +24,64 @@ const src = {
 	]
 };
 
-export default async function () {
+export default async function (fly) {
 	isWatch = 1;
-	await this.clear([tar, rel]);
-	await this.watch(src.js, 'scripts');
-	await this.watch(src.vendor, 'vendor');
-	await this.watch(src.copy, 'copies');
-	await this.watch(src.img, 'images');
-	await this.watch(src.css, 'styles');
-	await this.watch(src.tag, 'tags');
-	await this.start('serve');
+	await fly.clear([tar, rel]);
+	await fly.watch(src.js, 'scripts');
+	await fly.watch(src.vendor, 'vendor');
+	await fly.watch(src.copy, 'copies');
+	await fly.watch(src.img, 'images');
+	await fly.watch(src.css, 'styles');
+	await fly.watch(src.tag, 'tags');
+	await fly.start('serve');
 }
 
-export async function build() {
-	await this.clear([tar, rel]);
-	await this.parallel(['copies', 'images', 'vendor', 'scripts', 'styles']);
-	await this.start('uglify');
+export async function build(fly) {
+	await fly.clear([tar, rel]);
+	await fly.parallel(['copies', 'images', 'vendor', 'scripts', 'styles']);
+	await fly.start('uglify');
 }
 
-export async function release() {
-	await this.start('build');
-	await this.source(`${tar}/**/*`)
+export async function release(fly) {
+	await fly.start('build');
+	await fly.source(`${tar}/**/*`)
 		.rev({ignores: ['.html', '.png', 'jpg', '.jpeg', '.svg', '.ico', '.gif', '.json', '.webapp', '.txt']})
 		.revManifest({dest: rel, trim: tar}).revReplace().target(rel);
-	await this.source(`${rel}/*.html`).htmlmin().target(rel);
+	await fly.source(`${rel}/*.html`).htmlmin().target(rel);
 }
 
-export async function scripts(o) {
-	await this.source(o.src || src.js).xo().browserify({
+export async function scripts(fly, o) {
+	await fly.source(o.src || src.js).xo().browserify({
 		entries: 'src/scripts/app.js'
 	}).target(`${tar}/js`);
 	reload();
 }
 
-export async function vendor() {
-	await this.source(src.vendor).concat('vendor.js').target(`${tar}/js`);
+export async function vendor(fly) {
+	await fly.source(src.vendor).concat('vendor.js').target(`${tar}/js`);
 	reload();
 }
 
-export async function copies(o) {
-	await this.source(o.src || src.copy).target(tar);
+export async function copies(fly, o) {
+	await fly.source(o.src || src.copy).target(tar);
 	reload();
 }
 
-export async function images(o) {
-	await this.source(o.src || src.img).target(`${tar}/img`);
+export async function images(fly, o) {
+	await fly.source(o.src || src.img).target(`${tar}/img`);
 	reload();
 }
 
-export async function styles() {
-	await this.source('src/styles/app.sass').sass({
+export async function styles(fly) {
+	await fly.source('src/styles/app.sass').sass({
 		outputStyle: 'compressed',
 		includePaths: [bower]
 	}).autoprefixer().target(`${tar}/css`);
 	reload();
 }
 
-export async function uglify() {
-	await this.source(`${tar}/js/*.js`).uglify({
+export async function uglify(fly) {
+	await fly.source(`${tar}/js/*.js`).uglify({
 		compress: {
 			conditionals: 1,
 			drop_console: 1,
@@ -93,7 +93,7 @@ export async function uglify() {
 	}).target(`${tar}/js`);
 }
 
-export async function serve() {
+export async function serve(fly) {
 	isServer = 1;
 	bs({server: tar});
 }
