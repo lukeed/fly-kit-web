@@ -36,14 +36,11 @@
     "xo": "*"
   },
   "engines": {
-    "node": ">= 4.6.0"
+    "node": ">= 6"
   },
   "xo": {
     "envs": [
       "browser"
-    ],
-    "globals": [
-      "riot"
     ],
     "ignores": [
       "flyfile.js",
