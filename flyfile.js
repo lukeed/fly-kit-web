@@ -38,7 +38,8 @@ export default async function () {
 
 export async function build() {
 	await this.clear([tar, rel]);
-	await this.serial(['copies', 'images', 'vendor', 'scripts', 'styles', 'uglify']);
+	await this.parallel(['copies', 'images', 'vendor', 'scripts', 'styles']);
+	await this.start('uglify');
 }
 
 export async function release() {
