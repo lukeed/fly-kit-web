@@ -1587,15 +1587,9 @@ fly-rev@^2.2.0:
     rev-hash "^1.0.0"
     sort-keys "^1.1.1"
 
-fly-sass@^2.0.0:
-  version "2.0.0"
-  resolved "https://registry.yarnpkg.com/fly-sass/-/fly-sass-2.0.0.tgz#3b80b8fbc100b3d6f72dde3dd61e45e93008bb22"
-  dependencies:
-    node-sass "^3.10.0"
-
-fly-sass@lukeed/fly-sass:
-  version "2.0.0"
-  resolved "https://codeload.github.com/lukeed/fly-sass/tar.gz/39ea32bba30e16377876e6d4b79614b626932c23"
+fly-sass@^2.1.0:
+  version "2.1.0"
+  resolved "https://registry.yarnpkg.com/fly-sass/-/fly-sass-2.1.0.tgz#d350c35b8b6a59e0f76be0739e546cfc71aab150"
   dependencies:
     node-sass "^4.5.0"
 
@@ -2730,27 +2724,6 @@ node-pre-gyp@^0.6.29:
     semver "~5.3.0"
     tar "~2.2.1"
     tar-pack "~3.3.0"
-
-node-sass@^3.10.0:
-  version "3.13.0"
-  resolved "https://registry.yarnpkg.com/node-sass/-/node-sass-3.13.0.tgz#d08b95bdebf40941571bd2c16a9334b980f8924f"
-  dependencies:
-    async-foreach "^0.1.3"
-    chalk "^1.1.1"
-    cross-spawn "^3.0.0"
-    gaze "^1.0.0"
-    get-stdin "^4.0.1"
-    glob "^7.0.3"
-    in-publish "^2.0.0"
-    lodash.assign "^4.2.0"
-    lodash.clonedeep "^4.3.2"
-    meow "^3.7.0"
-    mkdirp "^0.5.1"
-    nan "^2.3.2"
-    node-gyp "^3.3.1"
-    npmlog "^4.0.0"
-    request "^2.61.0"
-    sass-graph "^2.1.1"
 
 node-sass@^4.5.0:
   version "4.5.0"
