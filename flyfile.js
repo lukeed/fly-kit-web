@@ -26,7 +26,7 @@ const src = {
 
 export default async function (fly) {
 	isWatch = 1;
-	await fly.clear([tar, rel]);
+	await fly.clear([tar, rel]).start('build');
 	await fly.watch(src.js, 'scripts');
 	await fly.watch(src.vendor, 'vendor');
 	await fly.watch(src.copy, 'copies');
