@@ -21,7 +21,7 @@
   "dependencies": {},
   "devDependencies": {
     "browser-sync": "^2.18.7",
-    "fly": "^2.0.0",
+    "fly": "^2.0.1",
     "fly-autoprefixer": "^1.1.0",
     "fly-browserify2": "^2.1.0",
     "fly-clear": "^1.0.0",
@@ -31,7 +31,7 @@
     "fly-rev": "^2.2.0",
     "fly-sass": "^2.1.0",
     "fly-uglify": "^2.1.0",
-    "fly-watch": "^1.0.0",
+    "fly-watch": "^1.1.0",
     "fly-xo": "^2.1.0",
     "xo": "*"
   },
