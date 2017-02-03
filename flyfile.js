@@ -32,7 +32,6 @@ export default async function (fly) {
 	await fly.watch(src.copy, 'copies');
 	await fly.watch(src.img, 'images');
 	await fly.watch(src.css, 'styles');
-	await fly.watch(src.tag, 'tags');
 	await fly.start('serve');
 }
 
