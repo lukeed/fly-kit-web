@@ -42,7 +42,6 @@ export async function build(fly) {
 }
 
 export async function release(fly) {
-	await fly.start('build');
 	await fly.source(`${tar}/**/*`)
 		.rev({ignores: ['.html', '.png', 'jpg', '.jpeg', '.svg', '.ico', '.gif', '.json', '.webapp', '.txt']})
 		.revManifest({dest: rel, trim: tar}).revReplace().target(rel);

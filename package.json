@@ -13,7 +13,7 @@
   "scripts": {
     "fly": "fly",
     "build": "fly build",
-    "release": "fly release",
+    "release": "fly build release",
     "start": "fly build serve",
     "watch": "fly",
     "test": "xo"
